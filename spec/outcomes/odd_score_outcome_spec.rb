@@ -3,7 +3,7 @@ require 'outcomes/odd_score_outcome'
 require 'team'
 require 'batsman'
 
-describe OddScoreOutcome do
+describe Outcomes::OddScoreOutcome do
   describe '#resultant_team' do
     context 'when it is the last ball of the over' do
       it 'returns a new team with same strike positions' do
@@ -13,7 +13,7 @@ describe OddScoreOutcome do
 
         resultant_team = instance_double(Team)
         expect(Team).to receive(:new).with(batsmen, striker, non_striker).and_return(resultant_team)
-        actual_team = OddScoreOutcome.new.resultant_team(batsmen, striker, non_striker, true)
+        actual_team = Outcomes::OddScoreOutcome.new(2).resultant_team(batsmen, striker, non_striker, true)
 
         expect(actual_team).to eq resultant_team
       end
@@ -27,7 +27,7 @@ describe OddScoreOutcome do
 
         resultant_team = instance_double(Team)
         expect(Team).to receive(:new).with(batsmen, non_striker, striker).and_return(resultant_team)
-        actual_team = OddScoreOutcome.new.resultant_team(batsmen, striker, non_striker, false)
+        actual_team = Outcomes::OddScoreOutcome.new(2).resultant_team(batsmen, striker, non_striker, false)
 
         expect(actual_team).to eq resultant_team
       end

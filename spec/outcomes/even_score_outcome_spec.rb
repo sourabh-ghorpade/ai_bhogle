@@ -3,7 +3,7 @@ require 'outcomes/even_score_outcome'
 require 'team'
 require 'batsman'
 
-describe EvenScoreOutcome do
+describe Outcomes::EvenScoreOutcome do
   describe '#resultant_team' do
     context 'when it is the last ball of the over' do
       it 'returns a new team with rotated strike positions' do
@@ -13,7 +13,7 @@ describe EvenScoreOutcome do
 
         resultant_team = instance_double(Team)
         expect(Team).to receive(:new).with(batsmen, non_striker, striker).and_return(resultant_team)
-        actual_team = EvenScoreOutcome.new.resultant_team(batsmen, striker, non_striker, true)
+        actual_team = Outcomes::EvenScoreOutcome.new(2).resultant_team(batsmen, striker, non_striker, true)
 
         expect(actual_team).to eq resultant_team
       end
@@ -27,7 +27,7 @@ describe EvenScoreOutcome do
 
         resultant_team = instance_double(Team)
         expect(Team).to receive(:new).with(batsmen, striker, non_striker).and_return(resultant_team)
-        actual_team = EvenScoreOutcome.new.resultant_team(batsmen, striker, non_striker, false)
+        actual_team = Outcomes::EvenScoreOutcome.new(2).resultant_team(batsmen, striker, non_striker, false)
 
         expect(actual_team).to eq resultant_team
       end

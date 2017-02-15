@@ -7,10 +7,15 @@ class MatchSimulator
   end
 
   def simulate
-    @number_of_balls_left.times.inject(ScoreCard.new) do |score_card, ball_number|
+    ScoreCard.new(outcomes)
+  end
+
+  private
+  def outcomes
+    @number_of_balls_left.times.inject([]) do |outcomes, ball_number|
       is_last_ball_of_over = (ball_number % BALLS_IN_AN_OVER) == 0
       outcome, @batting_team = @batting_team.play(is_last_ball_of_over)
-      score_card.add_outcome(outcome)
+      outcomes << outcome
     end
   end
 end

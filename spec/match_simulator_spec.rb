@@ -7,16 +7,16 @@ describe MatchSimulator do
   describe '#simulate' do
     it 'returns match result' do
       team = instance_double(Team)
-      expected_result = instance_double(ScoreCard)
       outcome = double('Outcome')
       expect(team).to receive(:play).with(false).exactly(20).times.and_return([outcome, team])
       expect(team).to receive(:play).with(true).exactly(4).times.and_return([outcome, team])
-      expect(ScoreCard).to receive(:new).and_return(expected_result)
-      expect(expected_result).to receive(:add_outcome).exactly(24).times.with(outcome).and_return(expected_result)
+      expected_outcomes = (1...24).each.inject([]) { |outcomes| outcomes << outcome}
+      expected_scorecard = instance_double(ScoreCard)
+      expect(ScoreCard).to receive(:new).with(array_including(expected_outcomes)).and_return(expected_scorecard)
 
       actual_result = MatchSimulator.new(4, team).simulate
 
-      expect(actual_result).to eq expected_result
+      expect(actual_result).to eq expected_scorecard
     end
   end
 end

@@ -1,5 +1,5 @@
 class ScoreCard
-  def add_outcome(outcome)
+  def initialize(outcomes)
 
   end
 end

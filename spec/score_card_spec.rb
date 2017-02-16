@@ -9,13 +9,22 @@ describe ScoreCard do
                   instance_double('Outcome', runs_scored: 0, commentary: 'NS Nodhi is out'),
                   instance_double('Outcome', runs_scored: 1, commentary: 'R Rumrah scores 1 run'),
                   instance_double('Outcome', runs_scored: 1, commentary: 'Kirat Boli scores 1 run'),
+                  instance_double('Outcome', runs_scored: 1, commentary: 'R Rumrah scores 1 run'),
+                  instance_double('Outcome', runs_scored: 1, commentary: 'Kirat Boli scores 1 run'),
+                  instance_double('Outcome', runs_scored: 1, commentary: 'R Rumrah scores 1 run'),
+                  instance_double('Outcome', runs_scored: 1, commentary: 'Kirat Boli scores 1 run'),
+                  instance_double('Outcome', runs_scored: 1, commentary: 'R Rumrah scores 1 run'),
+                  instance_double('Outcome', runs_scored: 1, commentary: 'Kirat Boli scores 1 run'),
                   instance_double('Outcome', runs_scored: 1, commentary: 'R Rumrah scores 1 run')]
-      number_of_overs = 1
+      number_of_overs = 2
       target = 40
       actual_commentary = ScoreCard.new(number_of_overs, target, outcomes).commentary
 
-      expected_commentary = ['1 overs left. 40 runs to win', '0.1 Kirat Boli scores 1 run', '0.2 NS Nodhi scores 4 runs', '0.3 NS Nodhi is out',
-                             '0.4 R Rumrah scores 1 run', '0.5 Kirat Boli scores 1 run', '0.6 R Rumrah scores 1 run', '0 overs left. 32 runs to win']
+      expected_commentary = ['2 overs left. 40 runs to win', '0.1 Kirat Boli scores 1 run', '0.2 NS Nodhi scores 4 runs',
+                             '0.3 NS Nodhi is out', '0.4 R Rumrah scores 1 run', '0.5 Kirat Boli scores 1 run',
+                             '0.6 R Rumrah scores 1 run', '1 overs left. 32 runs to win', '1.1 Kirat Boli scores 1 run',
+                             '1.2 R Rumrah scores 1 run', '1.3 Kirat Boli scores 1 run', '1.4 R Rumrah scores 1 run',
+                             '1.5 Kirat Boli scores 1 run', '1.6 R Rumrah scores 1 run', '0 overs left. 26 runs to win']
       expect(actual_commentary).to eq expected_commentary
     end
   end

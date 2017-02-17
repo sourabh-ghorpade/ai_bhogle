@@ -1,21 +1,22 @@
 require 'spec_helper'
 require 'score_card'
+require 'played_ball'
 
 describe ScoreCard do
   describe '#generate_commentry' do
     it 'returns commentary of the outcomes' do
-      outcomes = [instance_double('Outcome', runs_scored: 1, commentary: 'Kirat Boli scores 1 run'),
-                  instance_double('Outcome', runs_scored: 4, commentary: 'NS Nodhi scores 4 runs'),
-                  instance_double('Outcome', runs_scored: 0, commentary: 'NS Nodhi is out'),
-                  instance_double('Outcome', runs_scored: 1, commentary: 'R Rumrah scores 1 run'),
-                  instance_double('Outcome', runs_scored: 1, commentary: 'Kirat Boli scores 1 run'),
-                  instance_double('Outcome', runs_scored: 1, commentary: 'R Rumrah scores 1 run'),
-                  instance_double('Outcome', runs_scored: 1, commentary: 'Kirat Boli scores 1 run'),
-                  instance_double('Outcome', runs_scored: 1, commentary: 'R Rumrah scores 1 run'),
-                  instance_double('Outcome', runs_scored: 1, commentary: 'Kirat Boli scores 1 run'),
-                  instance_double('Outcome', runs_scored: 1, commentary: 'R Rumrah scores 1 run'),
-                  instance_double('Outcome', runs_scored: 1, commentary: 'Kirat Boli scores 1 run'),
-                  instance_double('Outcome', runs_scored: 1, commentary: 'R Rumrah scores 1 run')]
+      outcomes = [instance_double(PlayedBall, runs_scored: 1, over_number: 0, comment: '0.1 Kirat Boli scores 1 run', last_ball_of_over?: false),
+                  instance_double(PlayedBall, runs_scored: 4, over_number: 0, comment: '0.2 NS Nodhi scores 4 runs', last_ball_of_over?: false),
+                  instance_double(PlayedBall, runs_scored: 0, over_number: 0, comment: '0.3 NS Nodhi is out', last_ball_of_over?: false),
+                  instance_double(PlayedBall, runs_scored: 1, over_number: 0, comment: '0.4 R Rumrah scores 1 run', last_ball_of_over?: false),
+                  instance_double(PlayedBall, runs_scored: 1, over_number: 0, comment: '0.5 Kirat Boli scores 1 run', last_ball_of_over?: false),
+                  instance_double(PlayedBall, runs_scored: 1, over_number: 0, comment: '0.6 R Rumrah scores 1 run', last_ball_of_over?: true),
+                  instance_double(PlayedBall, runs_scored: 1, over_number: 1, comment: '1.1 Kirat Boli scores 1 run', last_ball_of_over?: false),
+                  instance_double(PlayedBall, runs_scored: 1, over_number: 1, comment: '1.2 R Rumrah scores 1 run', last_ball_of_over?: false),
+                  instance_double(PlayedBall, runs_scored: 1, over_number: 1, comment: '1.3 Kirat Boli scores 1 run', last_ball_of_over?: false),
+                  instance_double(PlayedBall, runs_scored: 1, over_number: 1, comment: '1.4 R Rumrah scores 1 run', last_ball_of_over?: false),
+                  instance_double(PlayedBall, runs_scored: 1, over_number: 1, comment: '1.5 Kirat Boli scores 1 run', last_ball_of_over?: false),
+                  instance_double(PlayedBall, runs_scored: 1, over_number: 1, comment: '1.6 R Rumrah scores 1 run', last_ball_of_over?: true)]
       number_of_overs = 2
       target = 40
       actual_commentary = ScoreCard.new(number_of_overs, target, outcomes).commentary

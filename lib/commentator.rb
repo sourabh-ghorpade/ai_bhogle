@@ -1,4 +1,4 @@
-class ScoreCard
+class Commentator
   BALLS_IN_AN_OVER = 6
 
   def initialize(number_of_overs, target, played_balls)
@@ -21,18 +21,6 @@ class ScoreCard
   end
 
   private
-  def ball_number_within_over(ball_number)
-    if first_or_last_ball_of_over?(ball_number + 1)
-      6
-    else
-      (ball_number + 1) % BALLS_IN_AN_OVER
-    end
-  end
-
-  def first_or_last_ball_of_over?(ball_number)
-    (ball_number % BALLS_IN_AN_OVER) == 0
-  end
-
   def over_commentary(current_over)
     "#{@total_overs - current_over} overs left. #{@target} runs to win"
   end

@@ -9,7 +9,7 @@ class MatchSimulator
   end
 
   def simulate
-    ScoreCard.new(@number_of_overs, @target, played_balls)
+    Commentator.new(@number_of_overs, @target, played_balls)
   end
 
   private

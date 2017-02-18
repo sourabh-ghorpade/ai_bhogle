@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'match_simulator'
 require 'team'
-require 'score_card'
+require 'commentator'
 require 'played_ball'
 
 describe MatchSimulator do
@@ -16,11 +16,11 @@ describe MatchSimulator do
         expect(PlayedBall).to receive(:new).with(ball_number, outcome).and_return(ball)
       end
       expected_balls = (1...24).each.inject([]) { |balls| balls << ball }
-      expected_scorecard = instance_double(ScoreCard)
+      expected_scorecard = instance_double(Commentator)
 
       target = 40
       number_of_overs = 4
-      expect(ScoreCard).to receive(:new).with(number_of_overs, target, array_including(expected_balls)).and_return(expected_scorecard)
+      expect(Commentator).to receive(:new).with(number_of_overs, target, array_including(expected_balls)).and_return(expected_scorecard)
 
       actual_result = MatchSimulator.new(number_of_overs, target, team).simulate
 

@@ -1,8 +1,8 @@
 require 'spec_helper'
-require 'score_card'
+require 'commentator'
 require 'played_ball'
 
-describe ScoreCard do
+describe Commentator do
   describe '#generate_commentry' do
     it 'returns commentary of the outcomes' do
       outcomes = [instance_double(PlayedBall, runs_scored: 1, over_number: 0, comment: '0.1 Kirat Boli scores 1 run', last_ball_of_over?: false),
@@ -19,7 +19,7 @@ describe ScoreCard do
                   instance_double(PlayedBall, runs_scored: 1, over_number: 1, comment: '1.6 R Rumrah scores 1 run', last_ball_of_over?: true)]
       number_of_overs = 2
       target = 40
-      actual_commentary = ScoreCard.new(number_of_overs, target, outcomes).commentary
+      actual_commentary = Commentator.new(number_of_overs, target, outcomes).commentary
 
       expected_commentary = ['2 overs left. 40 runs to win', '0.1 Kirat Boli scores 1 run', '0.2 NS Nodhi scores 4 runs',
                              '0.3 NS Nodhi is out', '0.4 R Rumrah scores 1 run', '0.5 Kirat Boli scores 1 run',

@@ -3,6 +3,7 @@ require 'match_simulator'
 require 'team'
 require 'commentator'
 require 'played_ball'
+require 'score_card'
 
 describe MatchSimulator do
   describe '#simulate' do
@@ -15,16 +16,22 @@ describe MatchSimulator do
       1...24.times do |ball_number|
         expect(PlayedBall).to receive(:new).with(ball_number, outcome).and_return(ball)
       end
-      expected_balls = (1...24).each.inject([]) { |balls| balls << ball }
-      expected_scorecard = instance_double(Commentator)
+      played_balls = (1...24).each.inject([]) { |balls| balls << ball }
+      commentator = instance_double(Commentator)
 
       target = 40
       number_of_overs = 4
-      expect(Commentator).to receive(:new).with(number_of_overs, target, array_including(expected_balls)).and_return(expected_scorecard)
+      expect(Commentator).to receive(:new).with(number_of_overs, target, array_including(played_balls)).and_return(commentator)
+      commentary = ['0.1 Kirat Boli scores 1 run']
+      expect(commentator).to receive(:commentary).and_return(commentary)
+      score_card = instance_double(ScoreCard)
+      expect(team).to receive(:score_card).and_return(score_card)
+      final_score_card = ['Kirat Boli - 12 (6 balls)']
+      expect(score_card).to receive(:to_a).and_return(final_score_card)
 
       actual_result = MatchSimulator.new(number_of_overs, target, team).simulate
 
-      expect(actual_result).to eq expected_scorecard
+      expect(actual_result).to eq final_score_card + commentary
     end
   end
 end

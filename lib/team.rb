@@ -5,6 +5,10 @@ class Team
     @non_striker = non_striker
   end
 
+  def score_card
+
+  end
+
   def play(is_last_ball)
     outcome = @striker.play
     return outcome, outcome.resultant_team(@batsmen, @striker, @non_striker, is_last_ball)

@@ -12,4 +12,8 @@ class Batsman
   def play
     External::WeightedProbabilityPicker.new(@shot_probability).pick
   end
+
+  def score_description
+
+  end
 end

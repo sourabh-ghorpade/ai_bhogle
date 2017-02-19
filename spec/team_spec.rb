@@ -10,17 +10,17 @@ describe Team do
       striker = instance_double(Batsman)
       non_striker = instance_double(Batsman)
       another_batsman = instance_double(Batsman)
-      batsmen = [striker, non_striker, another_batsman]
+      all_batsmen = [striker, non_striker, another_batsman]
       outcome = instance_double('Outcome')
       expect(striker).to receive(:play).and_return(outcome)
       expected_resultant_team = instance_double(Team)
       is_last_ball = true
       remaining_batsmen = [another_batsman]
       expect(outcome).to receive(:resultant_team)
-                             .with(remaining_batsmen, striker, non_striker, is_last_ball)
+                             .with(all_batsmen, remaining_batsmen, striker, non_striker, is_last_ball)
                              .and_return(expected_resultant_team)
 
-      actual_outcome, actual_team = Team.new(batsmen).play(is_last_ball)
+      actual_outcome, actual_team = Team.new(all_batsmen, remaining_batsmen, striker, non_striker).play(is_last_ball)
 
       expect(actual_outcome).to eq outcome
       expect(actual_team).to eq expected_resultant_team

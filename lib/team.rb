@@ -1,6 +1,7 @@
 class Team
-  def initialize(batsmen, striker = batsmen[0], non_striker = batsmen[1])
-    @batsmen = batsmen - [striker, non_striker]
+  def initialize(all_batsmen, remaining_batsmen, striker, non_striker)
+    @batsmen = all_batsmen
+    @remaining_batsmen = remaining_batsmen
     @striker = striker
     @non_striker = non_striker
   end
@@ -11,6 +12,6 @@ class Team
 
   def play(is_last_ball)
     outcome = @striker.play
-    return outcome, outcome.resultant_team(@batsmen, @striker, @non_striker, is_last_ball)
+    return outcome, outcome.resultant_team(@batsmen, @remaining_batsmen, @striker, @non_striker, is_last_ball)
   end
 end

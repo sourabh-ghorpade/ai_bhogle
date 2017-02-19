@@ -12,8 +12,9 @@ describe Outcomes::OutOutcome do
       remaining_batsmen = [another_batsman]
 
       resultant_team = instance_double(Team)
-      expect(Team).to receive(:new).with([], another_batsman, non_striker).and_return(resultant_team)
-      actual_team = Outcomes::OutOutcome.new.resultant_team(remaining_batsmen, striker, non_striker, true)
+      all_batsmen = [striker, non_striker, another_batsman]
+      expect(Team).to receive(:new).with(all_batsmen, [], another_batsman, non_striker).and_return(resultant_team)
+      actual_team = Outcomes::OutOutcome.new.resultant_team(all_batsmen, remaining_batsmen, striker, non_striker, true)
 
       expect(actual_team).to eq resultant_team
     end

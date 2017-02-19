@@ -34,9 +34,19 @@ describe Batsman do
                                                          .and_return(shot_picker)
       expect(shot_picker).to receive(:pick).and_return(three_runs_outcome)
 
-      actual_outcome = Batsman.new(shot_probabilities).play
+      actual_outcome = Batsman.new('Virat Kohli', 0, 0, shot_probabilities).play
 
       expect(actual_outcome).to eq three_runs_outcome
+    end
+  end
+
+  describe '#score_description' do
+    it 'returns score description' do
+      runs_scored = 10
+      balls_faced = 4
+      batsman = Batsman.new('Virat Kohli', runs_scored, balls_faced, {})
+
+      expect(batsman.score_description).to eq 'Virat Kohli- 10 (4 balls)'
     end
   end
 end

@@ -1,17 +1,17 @@
 class Team
-  def initialize(all_batsmen, remaining_batsmen, striker, non_striker)
-    @all_batsmen = all_batsmen
-    @remaining_batsmen = remaining_batsmen
+  def initialize(striker, non_striker, yet_to_play_batsmen, out_batsmen)
     @striker = striker
     @non_striker = non_striker
+    @yet_to_play_batsmen = yet_to_play_batsmen
+    @out_batsmen = out_batsmen
   end
 
   def score_card
-    ScoreCard.new(@all_batsmen)
+    ScoreCard.new([@striker, @non_striker] + @yet_to_play_batsmen + @out_batsmen)
   end
 
   def play(is_last_ball)
     outcome = @striker.play
-    return outcome, outcome.resultant_team(@all_batsmen, @remaining_batsmen, @striker, @non_striker, is_last_ball)
+    return outcome, outcome.resultant_team(@striker, @non_striker, @yet_to_play_batsmen, @out_batsmen, is_last_ball)
   end
 end

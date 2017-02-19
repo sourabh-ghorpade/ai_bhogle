@@ -4,9 +4,9 @@ module Outcomes
       @runs_scored = 0
     end
 
-    def resultant_team(all_batsmen, remaining_batsmen, _, non_striker, _)
-      next_batsman = remaining_batsmen.shift
-      Team.new(all_batsmen, remaining_batsmen, next_batsman, non_striker)
+    def resultant_team(striker, non_striker, yet_to_play_batsmen, out_batsmen, _)
+      next_batsman = yet_to_play_batsmen.shift
+      Team.new(next_batsman, non_striker, yet_to_play_batsmen, out_batsmen << striker)
     end
   end
 end

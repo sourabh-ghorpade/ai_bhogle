@@ -9,8 +9,8 @@ describe Team do
   let(:striker) { instance_double(Batsman) }
   let(:non_striker) { instance_double(Batsman) }
   let(:another_batsman) { instance_double(Batsman) }
-  let(:all_batsmen) { [striker, non_striker, another_batsman] }
-  let(:remaining_batsmen) { [another_batsman] }
+  let(:out_batsmen) { [instance_double(Batsman)] }
+  let(:yet_to_play_batsmen) { [another_batsman] }
 
   describe '#play' do
     it 'returns returns outcome of playing the ball and resultant team' do
@@ -19,10 +19,10 @@ describe Team do
       expected_resultant_team = instance_double(Team)
       is_last_ball = true
       expect(outcome).to receive(:resultant_team)
-                             .with(all_batsmen, remaining_batsmen, striker, non_striker, is_last_ball)
+                             .with(striker, non_striker, yet_to_play_batsmen, out_batsmen, is_last_ball)
                              .and_return(expected_resultant_team)
 
-      actual_outcome, actual_team = Team.new(all_batsmen, remaining_batsmen, striker, non_striker).play(is_last_ball)
+      actual_outcome, actual_team = Team.new(striker, non_striker, yet_to_play_batsmen, out_batsmen).play(is_last_ball)
 
       expect(actual_outcome).to eq outcome
       expect(actual_team).to eq expected_resultant_team
@@ -32,9 +32,10 @@ describe Team do
   describe '#score_card' do
     it 'returns score card of current batsmen' do
       expected_score_card = instance_double(ScoreCard)
+      all_batsmen = [striker, non_striker] + yet_to_play_batsmen + out_batsmen
       expect(ScoreCard).to receive(:new).with(all_batsmen).and_return(expected_score_card)
 
-      actual_score_card = Team.new(all_batsmen, remaining_batsmen, striker, non_striker).score_card
+      actual_score_card = Team.new(striker, non_striker, yet_to_play_batsmen, out_batsmen).score_card
 
       expect(actual_score_card).to eq expected_score_card
     end

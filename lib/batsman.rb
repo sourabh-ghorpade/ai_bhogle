@@ -1,5 +1,4 @@
 class Batsman
-
   def initialize(shot_probabilities)
     @shot_probability = {
         Outcomes::EvenScoreOutcome.new(0) => shot_probabilities[0], Outcomes::OddScoreOutcome.new(1) => shot_probabilities[1],

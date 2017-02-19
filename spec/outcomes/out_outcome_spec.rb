@@ -5,16 +5,19 @@ require 'batsman'
 
 describe Outcomes::OutOutcome do
   describe '#resultant_team' do
-    it 'returns a new team with next batsman on strike' do
-      striker = instance_double(Batsman)
-      non_striker = instance_double(Batsman)
-      another_batsman = instance_double(Batsman)
-      remaining_batsmen = [another_batsman]
+    let(:striker) { instance_double(Batsman) }
+    let(:non_striker) { instance_double(Batsman) }
+    let(:out_batsmen) { [instance_double(Batsman)] }
+    let(:next_batsman) { [instance_double(Batsman)] }
+    let(:yet_to_play_batsmen) { [next_batsman] }
 
+    it 'returns a new team with next batsman on strike' do
       resultant_team = instance_double(Team)
-      all_batsmen = [striker, non_striker, another_batsman]
-      expect(Team).to receive(:new).with(all_batsmen, [], another_batsman, non_striker).and_return(resultant_team)
-      actual_team = Outcomes::OutOutcome.new.resultant_team(all_batsmen, remaining_batsmen, striker, non_striker, true)
+      expect(Team).to receive(:new)
+                          .with(next_batsman, non_striker, yet_to_play_batsmen, out_batsmen << striker)
+                          .and_return(resultant_team)
+
+      actual_team = Outcomes::OutOutcome.new.resultant_team(striker, non_striker, yet_to_play_batsmen, out_batsmen, true)
 
       expect(actual_team).to eq resultant_team
     end

@@ -20,6 +20,10 @@ class Commentator
     end
   end
 
+  def result
+
+  end
+
   private
   def over_commentary(current_over)
     "#{@total_overs - current_over} overs left. #{@target} runs to win"

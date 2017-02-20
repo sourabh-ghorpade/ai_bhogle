@@ -40,13 +40,13 @@ describe Batsman do
     end
   end
 
-  describe '#score_description' do
+  describe '#score' do
     it 'returns score description' do
       runs_scored = 10
       balls_faced = 4
       batsman = Batsman.new('Virat Kohli', runs_scored, balls_faced, {})
 
-      expect(batsman.score_description).to eq 'Virat Kohli- 10 (4 balls)'
+      expect(batsman.score).to eq 'Virat Kohli- 10 (4 balls)'
     end
   end
 end

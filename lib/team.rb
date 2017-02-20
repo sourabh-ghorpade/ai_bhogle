@@ -6,8 +6,8 @@ class Team
     @out_batsmen = out_batsmen
   end
 
-  def score_card
-    ScoreCard.new([@striker, @non_striker] + @yet_to_play_batsmen + @out_batsmen)
+  def scores
+    ([@striker, @non_striker] + @yet_to_play_batsmen + @out_batsmen).map(&:score)
   end
 
   def play(is_last_ball)

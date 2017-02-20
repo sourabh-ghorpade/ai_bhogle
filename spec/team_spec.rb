@@ -3,13 +3,12 @@ require 'team'
 require 'batsman'
 require 'outcomes/out_outcome'
 require 'outcomes/even_score_outcome'
-require 'score_card'
 
 describe Team do
-  let(:striker) { instance_double(Batsman) }
-  let(:non_striker) { instance_double(Batsman) }
-  let(:another_batsman) { instance_double(Batsman) }
-  let(:out_batsmen) { [instance_double(Batsman)] }
+  let(:striker) { instance_double(Batsman, score: 'B1 - 2 (6 balls)') }
+  let(:non_striker) { instance_double(Batsman, score: 'B2 - 15 (6 balls)') }
+  let(:another_batsman) { instance_double(Batsman, score: 'B3 - 10 (6 balls)') }
+  let(:out_batsmen) { [instance_double(Batsman, score: 'B4 - 8 (4 balls)')] }
   let(:yet_to_play_batsmen) { [another_batsman] }
 
   describe '#play' do
@@ -29,15 +28,13 @@ describe Team do
     end
   end
 
-  describe '#score_card' do
-    it 'returns score card of current batsmen' do
-      expected_score_card = instance_double(ScoreCard)
-      all_batsmen = [striker, non_striker] + yet_to_play_batsmen + out_batsmen
-      expect(ScoreCard).to receive(:new).with(all_batsmen).and_return(expected_score_card)
+  describe '#scores' do
+    it 'returns scores of all batsmen' do
+      expected_scores = ['B1 - 2 (6 balls)', 'B2 - 15 (6 balls)', 'B3 - 10 (6 balls)', 'B4 - 8 (4 balls)']
 
-      actual_score_card = Team.new(striker, non_striker, yet_to_play_batsmen, out_batsmen).score_card
+      actual_scores = Team.new(striker, non_striker, yet_to_play_batsmen, out_batsmen).scores
 
-      expect(actual_score_card).to eq expected_score_card
+      expect(actual_scores).to eq expected_scores
     end
   end
 end

@@ -1,5 +1,6 @@
 module Outcomes
   class OutOutcome
+    attr_reader :runs_scored
     def initialize
       @runs_scored = 0
     end

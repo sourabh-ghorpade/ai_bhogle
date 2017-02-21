@@ -32,4 +32,10 @@ describe Outcomes::EvenScoreOutcome do
       end
     end
   end
+
+  describe '#runs_scored' do
+    it 'returns runs scored' do
+      expect(Outcomes::EvenScoreOutcome.new(10).runs_scored).to eq 10
+    end
+  end
 end

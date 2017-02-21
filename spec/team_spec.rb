@@ -14,11 +14,12 @@ describe Team do
   describe '#play' do
     it 'returns returns outcome of playing the ball and resultant team' do
       outcome = instance_double('Outcome')
-      expect(striker).to receive(:play).and_return(outcome)
+      updated_striker = double(Batsman)
+      expect(striker).to receive(:play).and_return([outcome, updated_striker])
       expected_resultant_team = instance_double(Team)
       is_last_ball = true
       expect(outcome).to receive(:resultant_team)
-                             .with(striker, non_striker, yet_to_play_batsmen, out_batsmen, is_last_ball)
+                             .with(updated_striker, non_striker, yet_to_play_batsmen, out_batsmen, is_last_ball)
                              .and_return(expected_resultant_team)
 
       actual_outcome, actual_team = Team.new(striker, non_striker, yet_to_play_batsmen, out_batsmen).play(is_last_ball)

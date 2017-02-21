@@ -9,8 +9,8 @@ describe MatchSimulator do
     it 'returns match result' do
       team = instance_double(Team)
       outcome = double('Outcome')
-      expect(team).to receive(:play).with(false).exactly(20).times.and_return(outcome)
-      expect(team).to receive(:play).with(true).exactly(4).times.and_return(outcome)
+      expect(team).to receive(:play).with(false).exactly(20).times.and_return([outcome, team])
+      expect(team).to receive(:play).with(true).exactly(4).times.and_return([outcome, team])
       ball = instance_double(PlayedBall)
       1...24.times do |ball_number|
         expect(PlayedBall).to receive(:new).with(ball_number, outcome).and_return(ball)

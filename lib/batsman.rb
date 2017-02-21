@@ -3,16 +3,12 @@ class Batsman
     @name = name
     @runs_scored = runs_scored
     @balls_faced = balls_faced
-    @shot_probability = {
-    Outcomes::EvenScoreOutcome.new(0) => shot_probabilities[0], Outcomes::OddScoreOutcome.new(1) => shot_probabilities[1],
-    Outcomes::EvenScoreOutcome.new(2) => shot_probabilities[2], Outcomes::OddScoreOutcome.new(3) => shot_probabilities[3],
-    Outcomes::EvenScoreOutcome.new(4) => shot_probabilities[4], Outcomes::OddScoreOutcome.new(5) => shot_probabilities[5],
-    Outcomes::EvenScoreOutcome.new(6) => shot_probabilities[6], Outcomes::OutOutcome.new => shot_probabilities[7]
-    }
+    @shot_probabilities = shot_probabilities
   end
 
   def play
-    External::WeightedProbabilityPicker.new(@shot_probability).pick
+    outcome = External::WeightedProbabilityPicker.new(@shot_probabilities).pick
+    return outcome, Batsman.new(@name, @runs_scored + outcome.runs_scored, @balls_faced + 1, @shot_probabilities)
   end
 
   def score

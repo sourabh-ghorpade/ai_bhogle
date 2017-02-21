@@ -1,7 +1,8 @@
 module Outcomes
   class OddScoreOutcome
-    def initialize(score)
-
+    attr_reader :runs_scored
+    def initialize(runs_scored)
+      @runs_scored = runs_scored
     end
 
     def resultant_team(striker, non_striker, yet_to_play_batsmen, out_batsmen, is_last_ball)

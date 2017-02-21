@@ -11,7 +11,7 @@ class Team
   end
 
   def play(is_last_ball)
-    outcome = @striker.play
-    return outcome, outcome.resultant_team(@striker, @non_striker, @yet_to_play_batsmen, @out_batsmen, is_last_ball)
+    outcome, updated_striker = @striker.play
+    return outcome, outcome.resultant_team(updated_striker, @non_striker, @yet_to_play_batsmen, @out_batsmen, is_last_ball)
   end
 end

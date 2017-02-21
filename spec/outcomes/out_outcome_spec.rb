@@ -22,4 +22,10 @@ describe Outcomes::OutOutcome do
       expect(actual_team).to eq resultant_team
     end
   end
+
+  describe '#runs_scored' do
+    it 'returns 0' do
+      expect(Outcomes::OutOutcome.new.runs_scored).to eq 0
+    end
+  end
 end

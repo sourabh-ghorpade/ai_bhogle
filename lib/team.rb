@@ -10,6 +10,14 @@ class Team
     ([@striker, @non_striker] + @yet_to_play_batsmen + @out_batsmen).map(&:score)
   end
 
+  def size
+
+  end
+
+  def name
+
+  end
+
   def play(is_last_ball)
     outcome, updated_striker = @striker.play
     return outcome, outcome.resultant_team(updated_striker, @non_striker, @yet_to_play_batsmen, @out_batsmen, is_last_ball)

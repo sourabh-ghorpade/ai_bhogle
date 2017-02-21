@@ -16,11 +16,11 @@ class MatchSimulator
 
   private
   def play_match
-    @number_of_balls_left.times.inject([]) do |outcomes, ball_number|
+    @number_of_balls_left.times.inject([]) do |balls, ball_number|
       is_last_ball_of_over = (ball_number % BALLS_IN_AN_OVER) == 0
 
       outcome, @batting_team = @batting_team.play(is_last_ball_of_over)
-      outcomes << PlayedBall.new(ball_number, outcome)
+      balls << PlayedBall.new(ball_number, outcome)
     end
   end
 end

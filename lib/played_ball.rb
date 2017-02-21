@@ -26,4 +26,8 @@ class PlayedBall
   def comment
 
   end
+
+  def out?
+
+  end
 end

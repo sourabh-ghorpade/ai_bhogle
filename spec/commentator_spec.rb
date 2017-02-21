@@ -34,10 +34,20 @@ describe Commentator do
   end
 
   describe '#result' do
-    it 'returns result of the outcomes' do
-      actual_result = Commentator.new(3, target, outcomes, team).result
+    context 'given team has won the match' do
+      it 'returns win result' do
+        actual_result = Commentator.new(3, target, outcomes, team).result
 
-      expect(actual_result).to eq 'Lengaburu won by 3 wicket and 6 balls remaining'
+        expect(actual_result).to eq 'Lengaburu won by 3 wickets and 6 balls remaining'
+      end
+    end
+
+    context 'given team has lost the match' do
+      it 'returns loss result' do
+        actual_result = Commentator.new(3, 16, outcomes, team).result
+
+        expect(actual_result).to eq 'Lengaburu lost by 2 runs'
+      end
     end
   end
 end

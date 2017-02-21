@@ -25,7 +25,12 @@ class Commentator
   def result
     balls_remaining = @total_overs * BALLS_IN_AN_OVER - @played_balls.count
     wickets_lost = @played_balls.select(&:out?).count
-    "#{@team.name} won by #{@team.size - wickets_lost} wicket and #{balls_remaining} balls remaining"
+    runs_scored = @played_balls.inject(0) { |runs_scored, ball| runs_scored + ball.runs_scored }
+    if runs_scored >= @target
+      "#{@team.name} won by #{@team.size - wickets_lost} wickets and #{balls_remaining} balls remaining"
+    else
+      "#{@team.name} lost by #{@target - runs_scored} runs"
+    end
   end
 
   private

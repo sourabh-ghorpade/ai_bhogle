@@ -10,7 +10,7 @@ class MatchSimulator
 
   def simulate
     outcomes = play_match
-    commentator = Commentator.new(@number_of_overs, @target, outcomes)
+    commentator = Commentator.new(@number_of_overs, @target, outcomes, @batting_team)
     [commentator.result] + @batting_team.scores + commentator.commentary
   end
 

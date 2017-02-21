@@ -20,7 +20,7 @@ describe MatchSimulator do
 
       target = 40
       number_of_overs = 4
-      expect(Commentator).to receive(:new).with(number_of_overs, target, array_including(played_balls)).and_return(commentator)
+      expect(Commentator).to receive(:new).with(number_of_overs, target, array_including(played_balls), team).and_return(commentator)
       commentary = ['0.1 Kirat Boli scores 1 run']
       expect(commentator).to receive(:commentary).and_return(commentary)
       result = 'Lengaburu won by 1 wicket and 2 balls remaining'

@@ -9,18 +9,15 @@ class MatchSimulator
   end
 
   def simulate
-    outcomes = play_match
-    commentator = Commentator.new(@number_of_overs, @target, outcomes, @batting_team)
+    commentator = Commentator.new(@number_of_overs, @target, played_balls, @batting_team)
     [commentator.result] + @batting_team.scores + commentator.commentary
   end
 
   private
-  def play_match
-    @number_of_balls_left.times.inject([]) do |balls, ball_number|
-      is_last_ball_of_over = ((ball_number + 1) % 6) == 0
-
-      outcome, @batting_team = @batting_team.play(is_last_ball_of_over)
-      balls << PlayedBall.new(ball_number, outcome)
+  def played_balls
+    @number_of_balls_left.times.inject([]) do |played_balls, ball_number|
+      played_ball, @batting_team = @batting_team.play(ball_number + 1)
+      played_balls << played_ball
     end
   end
 end

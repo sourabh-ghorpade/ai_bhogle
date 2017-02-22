@@ -1,25 +1,17 @@
 require 'spec_helper'
-require 'match_simulator'
-require 'team'
-require 'commentator'
-require 'played_ball'
 
 describe MatchSimulator do
   describe '#simulate' do
     it 'returns match result' do
       team = instance_double(Team)
-      outcome = double('Outcome')
-      expect(team).to receive(:play).with(false).exactly(20).times.and_return([outcome, team])
-      expect(team).to receive(:play).with(true).exactly(4).times.and_return([outcome, team])
-      ball = instance_double(PlayedBall)
+      played_ball = instance_double(PlayedBall)
       1...24.times do |ball_number|
-        expect(PlayedBall).to receive(:new).with(ball_number, outcome).and_return(ball)
+        expect(team).to receive(:play).with(ball_number + 1).and_return([played_ball, team])
       end
-      played_balls = (1...24).each.inject([]) { |balls| balls << ball }
+      played_balls = (1...24).each.inject([]) { |balls| balls << played_ball }
       commentator = instance_double(Commentator)
-
-      target = 40
       number_of_overs = 4
+      target = 40
       expect(Commentator).to receive(:new).with(number_of_overs, target, array_including(played_balls), team).and_return(commentator)
       commentary = ['0.1 Kirat Boli scores 1 run']
       expect(commentator).to receive(:commentary).and_return(commentary)

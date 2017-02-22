@@ -1,14 +1,16 @@
 class Batsman
-  def initialize(name, runs_scored, balls_faced, shot_probabilities)
+  attr_reader :name
+  def initialize(name, shot_probabilities, runs_scored = 0, balls_faced = 0)
     @name = name
+    @shot_probabilities = shot_probabilities
     @runs_scored = runs_scored
     @balls_faced = balls_faced
-    @shot_probabilities = shot_probabilities
   end
 
-  def play
+  def play(ball_number)
     outcome = External::WeightedProbabilityPicker.new(@shot_probabilities).pick
-    return outcome, Batsman.new(@name, @runs_scored + outcome.runs_scored, @balls_faced + 1, @shot_probabilities)
+    ball = PlayedBall.new(ball_number, outcome, self)
+    return ball, Batsman.new(@name, @shot_probabilities, @runs_scored + outcome.runs_scored, @balls_faced + 1)
   end
 
   def score

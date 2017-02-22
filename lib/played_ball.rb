@@ -1,9 +1,10 @@
 class PlayedBall
   BALLS_IN_AN_OVER = 6
 
-  def initialize(number, outcome)
+  def initialize(number, outcome, batsman)
     @ball_number = number
     @outcome = outcome
+    @batsman = batsman
   end
 
   def number_within_over
@@ -19,7 +20,7 @@ class PlayedBall
   end
 
   def comment
-    "#{over_number}.#{number_within_over} #{@outcome.comment}"
+    "#{over_number}.#{number_within_over} #{batsman_name} scores #{runs_scored} runs"
   end
 
   def runs_scored
@@ -27,10 +28,14 @@ class PlayedBall
   end
 
   def batsman_name
-    @outcome.batsman_name
+    @batsman.name
   end
 
   def out?
     @outcome.out?
+  end
+
+  def resultant_team(name, striker, non_striker, yet_to_play_batsmen, out_batsmen)
+    @outcome.resultant_team(name, striker, non_striker, yet_to_play_batsmen, out_batsmen, last_ball_of_over?)
   end
 end

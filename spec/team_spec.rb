@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'team'
 require 'batsman'
+require 'played_ball'
 require 'outcomes/out_outcome'
 require 'outcomes/even_score_outcome'
 
@@ -14,18 +15,18 @@ describe Team do
 
   describe '#play' do
     it 'returns returns outcome of playing the ball and resultant team' do
-      outcome = instance_double('Outcome')
       updated_striker = double(Batsman)
-      expect(striker).to receive(:play).and_return([outcome, updated_striker])
+      ball_number = 0
+      expected_played_ball = instance_double(PlayedBall)
+      expect(striker).to receive(:play).with(ball_number).with(ball_number).and_return([expected_played_ball, updated_striker])
       expected_resultant_team = instance_double(Team)
-      is_last_ball = true
-      expect(outcome).to receive(:resultant_team)
-                             .with('Lengaburu',updated_striker, non_striker, yet_to_play_batsmen, out_batsmen, is_last_ball)
+      expect(expected_played_ball).to receive(:resultant_team)
+                             .with('Lengaburu', updated_striker, non_striker, yet_to_play_batsmen, out_batsmen)
                              .and_return(expected_resultant_team)
 
-      actual_outcome, actual_team = team.play(is_last_ball)
+      actual_played_ball, actual_team = team.play(ball_number)
 
-      expect(actual_outcome).to eq outcome
+      expect(actual_played_ball).to eq expected_played_ball
       expect(actual_team).to eq expected_resultant_team
     end
   end

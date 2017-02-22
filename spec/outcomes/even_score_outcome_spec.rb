@@ -38,4 +38,9 @@ describe Outcomes::EvenScoreOutcome do
       expect(Outcomes::EvenScoreOutcome.new(10).runs_scored).to eq 10
     end
   end
+  describe '#out?' do
+    it 'returns false' do
+      expect(Outcomes::EvenScoreOutcome.new(3).out?).to eq false
+    end
+  end
 end

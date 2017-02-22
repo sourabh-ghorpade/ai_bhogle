@@ -11,7 +11,7 @@ module Outcomes
     end
 
     def out?
-
+      false
     end
   end
 end

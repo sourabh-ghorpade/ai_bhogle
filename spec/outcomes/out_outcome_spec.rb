@@ -28,4 +28,10 @@ describe Outcomes::OutOutcome do
       expect(Outcomes::OutOutcome.new.runs_scored).to eq 0
     end
   end
+
+  describe '#out?' do
+    it 'returns true' do
+      expect(Outcomes::OutOutcome.new.out?).to eq true
+    end
+  end
 end

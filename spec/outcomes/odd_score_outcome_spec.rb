@@ -42,4 +42,10 @@ describe Outcomes::OddScoreOutcome do
       expect(Outcomes::OddScoreOutcome.new(10).runs_scored).to eq 10
     end
   end
+
+  describe '#out?' do
+    it 'returns false' do
+      expect(Outcomes::OddScoreOutcome.new(3).out?).to eq false
+    end
+  end
 end

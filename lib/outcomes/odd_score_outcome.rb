@@ -9,5 +9,9 @@ module Outcomes
       is_last_ball ? Team.new(striker, non_striker, yet_to_play_batsmen, out_batsmen) :
           Team.new(non_striker, striker, yet_to_play_batsmen, out_batsmen)
     end
+
+    def out?
+
+    end
   end
 end

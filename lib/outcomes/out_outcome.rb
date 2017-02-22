@@ -9,5 +9,9 @@ module Outcomes
       next_batsman = yet_to_play_batsmen.shift
       Team.new(next_batsman, non_striker, yet_to_play_batsmen, out_batsmen << striker)
     end
+
+    def out?
+
+    end
   end
 end

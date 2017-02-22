@@ -10,14 +10,15 @@ describe Outcomes::OutOutcome do
     let(:out_batsmen) { [instance_double(Batsman)] }
     let(:next_batsman) { [instance_double(Batsman)] }
     let(:yet_to_play_batsmen) { [next_batsman] }
+    let(:team_name) { 'Lengaburu' }
 
     it 'returns a new team with next batsman on strike' do
       resultant_team = instance_double(Team)
       expect(Team).to receive(:new)
-                          .with(next_batsman, non_striker, yet_to_play_batsmen, out_batsmen << striker)
+                          .with(team_name, next_batsman, non_striker, yet_to_play_batsmen, out_batsmen << striker)
                           .and_return(resultant_team)
 
-      actual_team = Outcomes::OutOutcome.new.resultant_team(striker, non_striker, yet_to_play_batsmen, out_batsmen, true)
+      actual_team = Outcomes::OutOutcome.new.resultant_team(team_name, striker, non_striker, yet_to_play_batsmen, out_batsmen, true)
 
       expect(actual_team).to eq resultant_team
     end

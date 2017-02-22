@@ -1,5 +1,7 @@
 class Team
-  def initialize(striker, non_striker, yet_to_play_batsmen, out_batsmen)
+  attr_reader :name
+  def initialize(name, striker, non_striker, yet_to_play_batsmen, out_batsmen)
+    @name = name
     @striker = striker
     @non_striker = non_striker
     @yet_to_play_batsmen = yet_to_play_batsmen
@@ -7,19 +9,20 @@ class Team
   end
 
   def scores
-    ([@striker, @non_striker] + @yet_to_play_batsmen + @out_batsmen).map(&:score)
+    all_batsmen.map(&:score)
   end
 
   def size
-
-  end
-
-  def name
-
+    all_batsmen.count
   end
 
   def play(is_last_ball)
     outcome, updated_striker = @striker.play
-    return outcome, outcome.resultant_team(updated_striker, @non_striker, @yet_to_play_batsmen, @out_batsmen, is_last_ball)
+    return outcome, outcome.resultant_team(@name, updated_striker, @non_striker, @yet_to_play_batsmen, @out_batsmen, is_last_ball)
+  end
+
+  private
+  def all_batsmen
+    ([@striker, @non_striker] + @yet_to_play_batsmen + @out_batsmen)
   end
 end

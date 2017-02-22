@@ -9,6 +9,7 @@ describe Outcomes::OddScoreOutcome do
     let(:non_striker) { instance_double(Batsman) }
     let(:out_batsmen) { [instance_double(Batsman)] }
     let(:yet_to_play_batsmen) { [instance_double(Batsman)] }
+    let(:team_name) { 'lengaburu' }
 
     context 'when it is the last ball of the over' do
       it 'returns a new team with same strike positions' do
@@ -16,8 +17,8 @@ describe Outcomes::OddScoreOutcome do
         non_striker = instance_double(Batsman)
 
         resultant_team = instance_double(Team)
-        expect(Team).to receive(:new).with(striker, non_striker, yet_to_play_batsmen, out_batsmen,).and_return(resultant_team)
-        actual_team = Outcomes::OddScoreOutcome.new(2).resultant_team(striker, non_striker, yet_to_play_batsmen, out_batsmen, true)
+        expect(Team).to receive(:new).with(team_name, striker, non_striker, yet_to_play_batsmen, out_batsmen,).and_return(resultant_team)
+        actual_team = Outcomes::OddScoreOutcome.new(2).resultant_team(team_name, striker, non_striker, yet_to_play_batsmen, out_batsmen, true)
 
         expect(actual_team).to eq resultant_team
       end
@@ -29,8 +30,8 @@ describe Outcomes::OddScoreOutcome do
         non_striker = instance_double(Batsman)
 
         resultant_team = instance_double(Team)
-        expect(Team).to receive(:new).with(non_striker, striker, yet_to_play_batsmen, out_batsmen,).and_return(resultant_team)
-        actual_team = Outcomes::OddScoreOutcome.new(2).resultant_team(striker, non_striker, yet_to_play_batsmen, out_batsmen, false)
+        expect(Team).to receive(:new).with(team_name, non_striker, striker, yet_to_play_batsmen, out_batsmen,).and_return(resultant_team)
+        actual_team = Outcomes::OddScoreOutcome.new(2).resultant_team(team_name, striker, non_striker, yet_to_play_batsmen, out_batsmen, false)
 
         expect(actual_team).to eq resultant_team
       end

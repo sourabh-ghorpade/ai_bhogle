@@ -30,7 +30,7 @@ describe Team do
                                                   yet_to_play_batsmen, out_batsmen)
                                             .and_return(ball_played_team)
         full_over_played_team = double('Team')
-        expected_played_over = instance_double(Over)
+        expected_played_over = instance_double(PlayedOver)
         expect(ball_played_team).to receive(:play)
                                         .with(over_number, already_played_balls + [currently_played_ball])
                                         .and_return([expected_played_over, full_over_played_team])
@@ -48,8 +48,8 @@ describe Team do
         six_played_balls = [instance_double(PlayedBall), instance_double(PlayedBall), instance_double(PlayedBall),
                              instance_double(PlayedBall), instance_double(PlayedBall), instance_double(PlayedBall)]
 
-        expected_played_over = instance_double(Over)
-        expect(Over).to receive(:new).with(six_played_balls).and_return(expected_played_over)
+        expected_played_over = instance_double(PlayedOver)
+        expect(PlayedOver).to receive(:new).with(six_played_balls).and_return(expected_played_over)
         played_over, actual_team = team.play(over_number, six_played_balls)
 
         expect(played_over).to eq expected_played_over

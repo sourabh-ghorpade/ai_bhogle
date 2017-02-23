@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'over'
+require 'played_over'
 
 describe MatchSimulator do
   describe '#simulate' do
@@ -7,7 +7,7 @@ describe MatchSimulator do
       team = instance_double(Team)
       number_of_overs = 4
       target = 40
-      over = instance_double(Over)
+      over = instance_double(PlayedOver)
       1...number_of_overs.times do |over_number|
         expect(team).to receive(:play).with(over_number + 1).and_return([over, team])
       end

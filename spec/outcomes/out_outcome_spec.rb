@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'outcomes/out_outcome'
 require 'team'
 require 'batsman'
+require 'all_out_team'
 
 describe Outcomes::OutOutcome do
   describe '#resultant_team' do
@@ -11,16 +12,30 @@ describe Outcomes::OutOutcome do
     let(:next_batsman) { [instance_double(Batsman)] }
     let(:yet_to_play_batsmen) { [next_batsman] }
     let(:team_name) { 'Lengaburu' }
+    context 'there are batsmen remaining' do
+      it 'returns a new team with next batsman on strike' do
+        resultant_team = instance_double(Team)
+        expect(Team).to receive(:new)
+                            .with(team_name, next_batsman, non_striker, yet_to_play_batsmen, out_batsmen << striker)
+                            .and_return(resultant_team)
 
-    it 'returns a new team with next batsman on strike' do
-      resultant_team = instance_double(Team)
-      expect(Team).to receive(:new)
-                          .with(team_name, next_batsman, non_striker, yet_to_play_batsmen, out_batsmen << striker)
-                          .and_return(resultant_team)
+        actual_team = Outcomes::OutOutcome.new.resultant_team(team_name, striker, non_striker, yet_to_play_batsmen, out_batsmen, true)
 
-      actual_team = Outcomes::OutOutcome.new.resultant_team(team_name, striker, non_striker, yet_to_play_batsmen, out_batsmen, true)
+        expect(actual_team).to eq resultant_team
+      end
+    end
 
-      expect(actual_team).to eq resultant_team
+    context 'there are no batsmen remaining' do
+      it 'returns an AllOutTeam' do
+        resultant_team = instance_double(AllOutTeam)
+        expect(AllOutTeam).to receive(:new)
+                            .with(team_name, out_batsmen + [striker, non_striker])
+                            .and_return(resultant_team)
+
+        actual_team = Outcomes::OutOutcome.new.resultant_team(team_name, striker, non_striker, [], out_batsmen, true)
+
+        expect(actual_team).to eq resultant_team
+      end
     end
   end
 

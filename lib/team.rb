@@ -20,7 +20,7 @@ class Team
 
   def play(over_number, played_balls = [])
     if played_balls.count == BALLS_IN_AN_OVER
-      return Over.new(played_balls), self
+      return PlayedOver.new(played_balls), self
     else
       played_ball, updated_striker = @striker.play(played_balls.count + 1)
       played_team = played_ball.resultant_team(@name, updated_striker, @non_striker, @yet_to_play_batsmen, @out_batsmen)

@@ -81,12 +81,24 @@ describe PlayedBall do
   end
 
   describe '#comment' do
-    it 'returns score comment for the ball' do
-      outcome = double('Outcome', runs_scored: 1)
-      expect(batsman).to receive(:name).and_return('Kirat Boli')
-      actual_comment = PlayedBall.new(11, outcome, batsman).comment
+    context 'it is score outcome' do
+      it 'returns score comment for the ball' do
+        outcome = double('Outcome', out?: false, runs_scored: 1)
+        expect(batsman).to receive(:name).and_return('Kirat Boli')
+        actual_comment = PlayedBall.new(11, outcome, batsman).comment
 
-      expect(actual_comment).to eq '1.5 Kirat Boli scores 1 runs'
+        expect(actual_comment).to eq '1.5 Kirat Boli scores 1 runs'
+      end
+    end
+
+    context 'it is out outcome' do
+      it 'returns out comment for the ball' do
+        outcome = double('Outcome', out?: true, runs_scored: 1)
+        expect(batsman).to receive(:name).and_return('Kirat Boli')
+        actual_comment = PlayedBall.new(11, outcome, batsman).comment
+
+        expect(actual_comment).to eq '1.5 Kirat Boli gets out!'
+      end
     end
   end
 

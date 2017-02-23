@@ -20,7 +20,15 @@ class PlayedBall
   end
 
   def comment
-    "#{over_number}.#{number_within_over} #{batsman_name} scores #{runs_scored} runs"
+    if out?
+      "#{over_name_and_player_name} gets out!"
+    else
+      "#{over_name_and_player_name} scores #{runs_scored} runs"
+    end
+  end
+
+  def over_name_and_player_name
+    "#{over_number}.#{number_within_over} #{batsman_name}"
   end
 
   def runs_scored

@@ -1,12 +1,9 @@
 class Inning
   BALLS_IN_AN_OVER = 6
 
-  def initialize(number_of_overs, target, overs, team)
-    @total_overs = number_of_overs
-    @current_over = -1
+  def initialize(target, overs, team)
     @target = target
     @overs = overs
-    @individual_scores = {}
     @team = team
   end
 

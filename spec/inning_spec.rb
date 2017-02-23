@@ -21,7 +21,7 @@ describe Inning do
 
   describe '#generate_commentry' do
     it 'returns commentary of the outcomes' do
-      actual_commentary = Inning.new(number_of_overs, target, overs, team).commentary
+      actual_commentary = Inning.new(target, overs, team).commentary
 
       expected_commentary = ['2 overs left. 14 runs to win', '0.1 Kirat Boli scores 1 run', '0.2 NS Nodhi scores 4 runs',
                              '0.3 NS Nodhi is out', '0.4 R Rumrah scores 1 run', '0.5 Kirat Boli scores 1 run',
@@ -35,7 +35,7 @@ describe Inning do
   describe '#result' do
     context 'given team has won the match' do
       it 'returns win result' do
-        actual_result = Inning.new(3, target, overs, team).result
+        actual_result = Inning.new(target, overs, team).result
 
         expect(actual_result).to eq 'Lengaburu won by 2 wickets and 0 balls remaining'
       end
@@ -43,7 +43,7 @@ describe Inning do
 
     context 'given team has lost the match' do
       it 'returns loss result' do
-        actual_result = Inning.new(3, 16, overs, team).result
+        actual_result = Inning.new(16, overs, team).result
 
         expect(actual_result).to eq 'Lengaburu lost by 1 runs'
       end

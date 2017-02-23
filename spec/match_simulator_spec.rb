@@ -13,9 +13,7 @@ describe MatchSimulator do
       end
       played_overs = [over, over, over, over]
       commentator = instance_double(Inning)
-      expect(Inning).to receive(:new)
-                                 .with(number_of_overs, target, array_including(played_overs), team)
-                                 .and_return(commentator)
+      expect(Inning).to receive(:new).with(target, array_including(played_overs), team).and_return(commentator)
       commentary = ['0.1 Kirat Boli scores 1 run']
       expect(commentator).to receive(:commentary).and_return(commentary)
       result = 'Lengaburu won by 1 wicket and 2 balls remaining'

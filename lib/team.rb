@@ -1,5 +1,7 @@
 class Team
   attr_reader :name
+  BALLS_IN_AN_OVER = 6
+
   def initialize(name, striker, non_striker, yet_to_play_batsmen, out_batsmen)
     @name = name
     @striker = striker
@@ -16,13 +18,18 @@ class Team
     all_batsmen.count
   end
 
-  def play(ball_number)
-    played_ball, updated_striker = @striker.play(ball_number)
-    return played_ball, played_ball.resultant_team(@name, updated_striker, @non_striker, @yet_to_play_batsmen, @out_batsmen)
+  def play(over_number, played_balls = [])
+    if played_balls.count == BALLS_IN_AN_OVER
+      return Over.new(played_balls), self
+    else
+      played_ball, updated_striker = @striker.play(played_balls.count + 1)
+      played_team = played_ball.resultant_team(@name, updated_striker, @non_striker, @yet_to_play_batsmen, @out_batsmen)
+      played_team.play(over_number, played_balls + [played_ball])
+    end
   end
 
   private
   def all_batsmen
-    ([@striker, @non_striker] + @yet_to_play_batsmen + @out_batsmen)
+    [@striker, @non_striker] + @yet_to_play_batsmen + @out_batsmen
   end
 end

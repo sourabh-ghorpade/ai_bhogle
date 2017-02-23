@@ -14,20 +14,47 @@ describe Team do
   let(:team) { Team.new('Lengaburu', striker, non_striker, yet_to_play_batsmen, out_batsmen) }
 
   describe '#play' do
-    it 'returns returns outcome of playing the ball and resultant team' do
-      updated_striker = double(Batsman)
-      ball_number = 0
-      expected_played_ball = instance_double(PlayedBall)
-      expect(striker).to receive(:play).with(ball_number).with(ball_number).and_return([expected_played_ball, updated_striker])
-      expected_resultant_team = instance_double(Team)
-      expect(expected_played_ball).to receive(:resultant_team)
-                             .with('Lengaburu', updated_striker, non_striker, yet_to_play_batsmen, out_batsmen)
-                             .and_return(expected_resultant_team)
+    context 'over is ongoing' do
+      it 'returns returns outcome of playing the ball and resultant team' do
+        updated_striker = double(Batsman)
+        already_played_balls = [instance_double(PlayedBall)]
+        played_balls_count = 1
+        over_number = 1
+        currently_played_ball = instance_double(PlayedBall)
+        expect(striker).to receive(:play)
+                               .with(played_balls_count + 1)
+                               .and_return([currently_played_ball, updated_striker])
+        ball_played_team = double('Team')
+        expect(currently_played_ball).to receive(:resultant_team)
+                                            .with('Lengaburu', updated_striker, non_striker,
+                                                  yet_to_play_batsmen, out_batsmen)
+                                            .and_return(ball_played_team)
+        full_over_played_team = double('Team')
+        expected_played_over = instance_double(Over)
+        expect(ball_played_team).to receive(:play)
+                                        .with(over_number, already_played_balls + [currently_played_ball])
+                                        .and_return([expected_played_over, full_over_played_team])
 
-      actual_played_ball, actual_team = team.play(ball_number)
+        actual_played_over, actual_team = team.play(over_number, already_played_balls)
 
-      expect(actual_played_ball).to eq expected_played_ball
-      expect(actual_team).to eq expected_resultant_team
+        expect(actual_played_over).to eq expected_played_over
+        expect(actual_team).to eq full_over_played_team
+      end
+    end
+
+    context 'over has ended' do
+      it 'returns returns outcome of playing the ball and resultant team' do
+        over_number = 1
+        six_played_balls = [instance_double(PlayedBall), instance_double(PlayedBall), instance_double(PlayedBall),
+                             instance_double(PlayedBall), instance_double(PlayedBall), instance_double(PlayedBall)]
+
+        expected_played_over = instance_double(Over)
+        expect(Over).to receive(:new).with(six_played_balls).and_return(expected_played_over)
+        played_over, actual_team = team.play(over_number, six_played_balls)
+
+        expect(played_over).to eq expected_played_over
+        expect(actual_team).to eq team
+      end
     end
   end
 

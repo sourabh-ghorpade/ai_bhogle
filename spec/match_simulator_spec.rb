@@ -1,18 +1,21 @@
 require 'spec_helper'
+require 'over'
 
 describe MatchSimulator do
   describe '#simulate' do
     it 'returns match result' do
       team = instance_double(Team)
-      played_ball = instance_double(PlayedBall)
-      1...24.times do |ball_number|
-        expect(team).to receive(:play).with(ball_number + 1).and_return([played_ball, team])
-      end
-      played_balls = (1...24).each.inject([]) { |balls| balls << played_ball }
-      commentator = instance_double(Commentator)
       number_of_overs = 4
       target = 40
-      expect(Commentator).to receive(:new).with(number_of_overs, target, array_including(played_balls), team).and_return(commentator)
+      over = instance_double(Over)
+      1...number_of_overs.times do |over_number|
+        expect(team).to receive(:play).with(over_number + 1).and_return([over, team])
+      end
+      played_overs = [over, over, over, over]
+      commentator = instance_double(Commentator)
+      expect(Commentator).to receive(:new)
+                                 .with(number_of_overs, target, array_including(played_overs), team)
+                                 .and_return(commentator)
       commentary = ['0.1 Kirat Boli scores 1 run']
       expect(commentator).to receive(:commentary).and_return(commentary)
       result = 'Lengaburu won by 1 wicket and 2 balls remaining'

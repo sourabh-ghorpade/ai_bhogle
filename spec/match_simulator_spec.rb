@@ -12,8 +12,8 @@ describe MatchSimulator do
         expect(team).to receive(:play).with(over_number + 1).and_return([over, team])
       end
       played_overs = [over, over, over, over]
-      commentator = instance_double(Commentator)
-      expect(Commentator).to receive(:new)
+      commentator = instance_double(Inning)
+      expect(Inning).to receive(:new)
                                  .with(number_of_overs, target, array_including(played_overs), team)
                                  .and_return(commentator)
       commentary = ['0.1 Kirat Boli scores 1 run']

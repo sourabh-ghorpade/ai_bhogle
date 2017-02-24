@@ -7,44 +7,25 @@ require 'outcomes/out_outcome'
 describe PlayedBall do
   let(:batsman) { instance_double(Batsman, name: 'Kirat Boli') }
   let(:outcome) { instance_double('Outcome') }
-  describe '#last_ball_of_over?' do
-    context 'when it is the last ball of the over' do
-      it 'returns true' do
-        expect(PlayedBall.new(6, outcome, batsman)).to be_last_ball_of_over
+
+  describe '#comment' do
+    context 'it is score outcome' do
+      it 'returns score comment for the ball' do
+        outcome = double('Outcome', out?: false, runs_scored: 1)
+        expect(batsman).to receive(:name).and_return('Kirat Boli')
+        actual_comment = PlayedBall.new(11, outcome, batsman).comment
+
+        expect(actual_comment).to eq 'Kirat Boli scores 1 runs'
       end
     end
 
-    context 'when it is not the last ball of the over' do
-      it 'returns true' do
-        expect(PlayedBall.new(1, outcome, batsman)).not_to be_last_ball_of_over
-      end
-    end
-  end
+    context 'it is out outcome' do
+      it 'returns out comment for the ball' do
+        outcome = double('Outcome', out?: true,)
+        expect(batsman).to receive(:name).and_return('Kirat Boli')
+        actual_comment = PlayedBall.new(11, outcome, batsman).comment
 
-  describe '#over_number' do
-    context 'when it is the last ball of the over' do
-      it 'returns the over same over number as other balls in that over' do
-        expect(PlayedBall.new(12, outcome, batsman).over_number).to eq 1
-      end
-    end
-
-    context 'when it is not the last ball of the over' do
-      it 'returns the over number for a particular ball number' do
-        expect(PlayedBall.new(11, outcome, batsman).over_number).to eq 1
-      end
-    end
-  end
-
-  describe '#number_within_over' do
-    context 'when it is the last ball of the over' do
-      it 'returns 6' do
-        expect(PlayedBall.new(12, outcome, batsman).number_within_over).to eq 6
-      end
-    end
-
-    context 'when it is not the last ball of the over' do
-      it 'returns the number within the over for the ball number' do
-        expect(PlayedBall.new(11, outcome, batsman).number_within_over).to eq 5
+        expect(actual_comment).to eq 'Kirat Boli gets out!'
       end
     end
   end
@@ -76,28 +57,6 @@ describe PlayedBall do
       it 'returns false' do
         outcome = instance_double(Outcomes::EvenScoreOutcome, out?: false)
         expect(PlayedBall.new(11, outcome, batsman).out?).to eq false
-      end
-    end
-  end
-
-  describe '#comment' do
-    context 'it is score outcome' do
-      it 'returns score comment for the ball' do
-        outcome = double('Outcome', out?: false, runs_scored: 1)
-        expect(batsman).to receive(:name).and_return('Kirat Boli')
-        actual_comment = PlayedBall.new(11, outcome, batsman).comment
-
-        expect(actual_comment).to eq '1.5 Kirat Boli scores 1 runs'
-      end
-    end
-
-    context 'it is out outcome' do
-      it 'returns out comment for the ball' do
-        outcome = double('Outcome', out?: true, runs_scored: 1)
-        expect(batsman).to receive(:name).and_return('Kirat Boli')
-        actual_comment = PlayedBall.new(11, outcome, batsman).comment
-
-        expect(actual_comment).to eq '1.5 Kirat Boli gets out!'
       end
     end
   end

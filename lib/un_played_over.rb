@@ -17,6 +17,6 @@ class UnPlayedOver
   end
 
   def played?
-
+    false
   end
 end

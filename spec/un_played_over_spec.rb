@@ -26,4 +26,10 @@ describe UnPlayedOver do
       expect(un_played_over.balls_played).to eq 0
     end
   end
+
+  describe '#played' do
+    it 'returns false' do
+      expect(UnPlayedOver.new.played?).to eq false
+    end
+  end
 end

@@ -21,6 +21,6 @@ class PlayedOver
   end
 
   def played?
-
+    true
   end
 end

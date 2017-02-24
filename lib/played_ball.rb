@@ -7,23 +7,11 @@ class PlayedBall
     @batsman = batsman
   end
 
-  def number_within_over
-    last_ball_of_over? ? 6 : @ball_number % BALLS_IN_AN_OVER
-  end
-
-  def over_number
-    last_ball_of_over? ? (@ball_number / BALLS_IN_AN_OVER) - 1 : @ball_number / BALLS_IN_AN_OVER
-  end
-
-  def last_ball_of_over?
-    (@ball_number % BALLS_IN_AN_OVER) == 0
-  end
-
   def comment
     if out?
-      "#{over_name_and_player_name} gets out!"
+      "#{batsman_name} gets out!"
     else
-      "#{over_name_and_player_name} scores #{runs_scored} runs"
+      "#{batsman_name} scores #{runs_scored} runs"
     end
   end
 
@@ -44,7 +32,7 @@ class PlayedBall
   end
 
   private
-  def over_name_and_player_name
-    "#{over_number}.#{number_within_over} #{batsman_name}"
+  def last_ball_of_over?
+    (@ball_number % BALLS_IN_AN_OVER) == 0
   end
 end

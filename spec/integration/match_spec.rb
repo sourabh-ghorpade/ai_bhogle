@@ -10,7 +10,7 @@ require 'played_ball'
 require 'team'
 
 describe 'Match Simulation' do
-  xit 'runs the match simulation and returns the result' do
+  it 'runs the match simulation and returns the result' do
     virat_kohli_shot_probabilities =
         {
             Outcomes::EvenScoreOutcome.new(0) => 5, Outcomes::OddScoreOutcome.new(1) => 30,
@@ -52,7 +52,7 @@ describe 'Match Simulation' do
     non_striker = Batsman.new('MS Dhoni', dhoni_shot_probabilities)
     yet_to_play_batsmen = [Batsman.new('Irfan Khan', irfan_shot_probabilities), Batsman.new('Bumrah', bumrah_probabilities)]
     batting_team = Team.new(team_name, striker, non_striker, yet_to_play_batsmen, [])
-    expected_result = ['Lengaburu won by 4 wickets and 0 balls remaining', 'Virat Kohli- 6 (6 balls)', 'MS Dhoni- 6 (6 balls)', 'Irfan Khan- 0 (0 balls)', 'Bumrah- 0 (0 balls)', '2 overs left. 12 runs to win', '0.1 Virat Kohli scores 1 runs', '0.2 Virat Kohli scores 1 runs', '0.3 Virat Kohli scores 1 runs', '0.4 Virat Kohli scores 1 runs', '0.5 Virat Kohli scores 1 runs', '0.6 Virat Kohli scores 1 runs', '1 overs left. 6 runs to win', '1.1 MS Dhoni scores 1 runs', '1.2 MS Dhoni scores 1 runs', '1.3 MS Dhoni scores 1 runs', '1.4 MS Dhoni scores 1 runs', '1.5 MS Dhoni scores 1 runs', '1.6 MS Dhoni scores 1 runs', '0 overs left. 0 runs to win']
+    expected_result = ['Lengaburu won by 4 wickets and 0 balls remaining', 'Virat Kohli- 6 (6 balls)', 'MS Dhoni- 6 (6 balls)', 'Irfan Khan- 0 (0 balls)', 'Bumrah- 0 (0 balls)', '2 overs left. 12 runs to win', '1.1 Virat Kohli scores 1 runs', '1.2 Virat Kohli scores 1 runs', '1.3 Virat Kohli scores 1 runs', '1.4 Virat Kohli scores 1 runs', '1.5 Virat Kohli scores 1 runs', '1.6 Virat Kohli scores 1 runs', '1 overs left. 6 runs to win', '2.1 MS Dhoni scores 1 runs', '2.2 MS Dhoni scores 1 runs', '2.3 MS Dhoni scores 1 runs', '2.4 MS Dhoni scores 1 runs', '2.5 MS Dhoni scores 1 runs', '2.6 MS Dhoni scores 1 runs', '0 overs left. 0 runs to win']
 
     actual_result = MatchSimulator.new(2, 12, batting_team).simulate
 

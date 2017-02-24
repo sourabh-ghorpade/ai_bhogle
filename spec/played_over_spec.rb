@@ -45,4 +45,10 @@ describe PlayedOver do
       expect(over.balls_played).to eq 3
     end
   end
+
+  describe '#played' do
+    it 'returns true' do
+      expect(PlayedOver.new(1,2).played?).to eq true
+    end
+  end
 end

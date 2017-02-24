@@ -12,13 +12,14 @@ describe AllOutTeam do
 
   describe '#play' do
     context 'when no balls have been played' do
-      it 'returns UnPlayedOver' do
+      it 'returns UnPlayedOver and self' do
         expected_over = instance_double(UnPlayedOver)
         expect(UnPlayedOver).to receive(:new).and_return(expected_over)
 
-        actual_over = team.play(2)
+        actual_over, updated_team = team.play(2)
 
         expect(actual_over).to eq expected_over
+        expect(updated_team).to eq team
       end
     end
 
@@ -26,11 +27,13 @@ describe AllOutTeam do
       it 'returns PlayedOver' do
         played_balls = [instance_double(PlayedBall)]
         expected_over = instance_double(PlayedOver)
-        expect(PlayedOver).to receive(:new).with(played_balls).and_return(expected_over)
+        over_number = 2
+        expect(PlayedOver).to receive(:new).with(2, played_balls).and_return(expected_over)
 
-        actual_over = team.play(2, played_balls)
+        actual_over, updated_team= team.play(over_number, played_balls)
 
         expect(actual_over).to eq expected_over
+        expect(updated_team).to eq team
       end
     end
   end

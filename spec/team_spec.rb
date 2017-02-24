@@ -49,7 +49,7 @@ describe Team do
                              instance_double(PlayedBall), instance_double(PlayedBall), instance_double(PlayedBall)]
 
         expected_played_over = instance_double(PlayedOver)
-        expect(PlayedOver).to receive(:new).with(six_played_balls).and_return(expected_played_over)
+        expect(PlayedOver).to receive(:new).with(over_number, six_played_balls).and_return(expected_played_over)
         played_over, actual_team = team.play(over_number, six_played_balls)
 
         expect(played_over).to eq expected_played_over

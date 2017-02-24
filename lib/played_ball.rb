@@ -27,10 +27,6 @@ class PlayedBall
     end
   end
 
-  def over_name_and_player_name
-    "#{over_number}.#{number_within_over} #{batsman_name}"
-  end
-
   def runs_scored
     @outcome.runs_scored
   end
@@ -45,5 +41,10 @@ class PlayedBall
 
   def resultant_team(name, striker, non_striker, yet_to_play_batsmen, out_batsmen)
     @outcome.resultant_team(name, striker, non_striker, yet_to_play_batsmen, out_batsmen, last_ball_of_over?)
+  end
+
+  private
+  def over_name_and_player_name
+    "#{over_number}.#{number_within_over} #{batsman_name}"
   end
 end

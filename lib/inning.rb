@@ -10,7 +10,7 @@ class Inning
   def commentary
     runs_required_to_win = @target
     pre_inning_comment = [over_commentary(@overs.size, runs_required_to_win)]
-    @overs.each.with_index(1).inject(pre_inning_comment) do |comments, (over, over_number)|
+    comments = @overs.each.with_index(1).inject(pre_inning_comment) do |comments, (over, over_number)|
       runs_required_to_win -= over.runs_scored
       if over.played?
         end_of_over_commentary = [over_commentary(@overs.size - over_number, runs_required_to_win)]
@@ -19,8 +19,8 @@ class Inning
       end
       comments + over.comments + end_of_over_commentary
     end
+    remove_final_over_comment(comments)
   end
-
 
   def result
     balls_played = @overs.inject(0) { |balls_played, over| balls_played + over.balls_played }
@@ -35,6 +35,11 @@ class Inning
   end
 
   private
+  def remove_final_over_comment(comments)
+    comments.pop
+    comments
+  end
+
   def over_commentary(overs_left, runs_required_to_win)
     "#{overs_left} overs left. #{runs_required_to_win} runs to win"
   end

@@ -30,7 +30,7 @@ describe Inning do
                              '0.3 NS Nodhi gets out', '0.4 R Rumrah scores 1 run', '0.5 Kirat Boli scores 1 run',
                              '0.6 R Rumrah scores 1 run', '2 overs left. 6 runs to win', '1.1 Kirat Boli scores 1 run',
                              '1.2 R Rumrah scores 1 run', '1.3 Kirat Boli gets out', '1.4 Irfan scores 1 run',
-                             '1.5 R Rumrah scores 1 run', '1.6 Irfan gets out', '1 overs left. 2 runs to win']
+                             '1.5 R Rumrah scores 1 run', '1.6 Irfan gets out']
       expect(actual_commentary).to eq expected_commentary
     end
   end

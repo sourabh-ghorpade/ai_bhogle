@@ -1,8 +1,4 @@
 require 'spec_helper'
-require 'outcomes/out_outcome'
-require 'team'
-require 'batsman'
-require 'all_out_team'
 
 describe Outcomes::OutOutcome do
   describe '#resultant_team' do
@@ -26,11 +22,11 @@ describe Outcomes::OutOutcome do
     end
 
     context 'there are no batsmen remaining' do
-      it 'returns an AllOutTeam' do
-        resultant_team = instance_double(AllOutTeam)
+      it 'returns an AllOutTeam with remaining batsmen as empty' do
+        resultant_team = instance_double(Team)
         expect(AllOutTeam).to receive(:new)
-                            .with(team_name, out_batsmen + [striker, non_striker])
-                            .and_return(resultant_team)
+                                  .with(team_name, out_batsmen + [striker, non_striker])
+                                  .and_return(resultant_team)
 
         actual_team = Outcomes::OutOutcome.new.resultant_team(team_name, striker, non_striker, [], out_batsmen, true)
 

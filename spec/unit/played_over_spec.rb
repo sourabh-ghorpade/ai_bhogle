@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'played_over'
-require 'played_ball'
 
 describe PlayedOver do
   describe '#comments' do
@@ -48,7 +46,7 @@ describe PlayedOver do
 
   describe '#played' do
     it 'returns true' do
-      expect(PlayedOver.new(1,2).played?).to eq true
+      expect(PlayedOver.new(1, 2).played?).to eq true
     end
   end
 end

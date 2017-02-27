@@ -1,7 +1,4 @@
 require 'spec_helper'
-require 'inning'
-require 'played_ball'
-require 'played_over'
 
 describe Inning do
   let(:overs) { [instance_double(PlayedOver, runs_scored: 8, wickets_lost: 1, balls_played: 6,

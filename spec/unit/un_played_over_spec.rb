@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'un_played_over'
 
 describe UnPlayedOver do
   let(:un_played_over) { UnPlayedOver.new }

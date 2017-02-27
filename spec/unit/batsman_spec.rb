@@ -1,11 +1,4 @@
 require 'spec_helper'
-require 'batsman'
-require 'played_ball'
-require 'outcomes/even_score_outcome'
-require 'outcomes/odd_score_outcome'
-require 'outcomes/out_outcome'
-require 'external/weighted_probability_picker'
-
 
 describe Batsman do
   describe '#play' do
@@ -48,7 +41,7 @@ describe Batsman do
 
   describe '#score' do
     it 'returns score description' do
-      batsman = Batsman.new('Virat Kohli', {}, 0,0)
+      batsman = Batsman.new('Virat Kohli', {}, 0, 0)
 
       expect(batsman.name).to eq 'Virat Kohli'
     end

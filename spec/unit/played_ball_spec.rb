@@ -1,8 +1,4 @@
 require 'spec_helper'
-require 'played_ball'
-require 'batsman'
-require 'outcomes/even_score_outcome'
-require 'outcomes/out_outcome'
 
 describe PlayedBall do
   let(:batsman) { instance_double(Batsman, name: 'Kirat Boli') }

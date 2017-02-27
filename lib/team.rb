@@ -10,14 +10,10 @@ class Team
     @out_batsmen = out_batsmen
   end
 
-  def play(over_number, played_balls = [])
-    if played_balls.count == BALLS_IN_AN_OVER
-      return PlayedOver.new(over_number, played_balls), self
-    else
-      played_ball, updated_striker = @striker.play(played_balls.count + 1)
-      played_team = played_ball.resultant_team(@name, updated_striker, @non_striker, @yet_to_play_batsmen, @out_batsmen)
-      played_team.play(over_number, played_balls + [played_ball])
-    end
+  def play(ball_number)
+    played_ball, updated_striker = @striker.play(ball_number)
+    resultant_team = played_ball.resultant_team(@name, updated_striker, @non_striker, @yet_to_play_batsmen, @out_batsmen)
+    return played_ball, resultant_team
   end
 
   def scores
@@ -26,6 +22,10 @@ class Team
 
   def size
     all_batsmen.count
+  end
+
+  def all_out?
+    false
   end
 
   private

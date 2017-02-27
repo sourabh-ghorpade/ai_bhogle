@@ -14,11 +14,7 @@ class AllOutTeam
     @out_batsmen.count
   end
 
-  def play(over_number, played_balls = [])
-    return result_over(over_number, played_balls), self
-  end
-
-  def result_over(over_number, played_balls)
-    played_balls.empty? ? UnPlayedOver.new : PlayedOver.new(over_number, played_balls)
+  def all_out?
+    true
   end
 end

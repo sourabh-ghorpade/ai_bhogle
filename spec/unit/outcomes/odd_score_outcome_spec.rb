@@ -12,12 +12,12 @@ describe Outcomes::OddScoreOutcome do
     let(:team_name) { 'lengaburu' }
 
     context 'when it is the last ball of the over' do
-      it 'returns a new team with same strike positions' do
+      it 'returns a new team with rotated strike positions' do
         striker = instance_double(Batsman)
         non_striker = instance_double(Batsman)
 
         resultant_team = instance_double(Team)
-        expect(Team).to receive(:new).with(team_name, striker, non_striker, yet_to_play_batsmen, out_batsmen,).and_return(resultant_team)
+        expect(Team).to receive(:new).with(team_name, non_striker, striker, yet_to_play_batsmen, out_batsmen,).and_return(resultant_team)
         actual_team = Outcomes::OddScoreOutcome.new(2).resultant_team(team_name, striker, non_striker, yet_to_play_batsmen, out_batsmen, true)
 
         expect(actual_team).to eq resultant_team
@@ -25,12 +25,12 @@ describe Outcomes::OddScoreOutcome do
     end
 
     context 'when it is not the last ball of the over' do
-      it 'returns a new team with rotated strike positions' do
+      it 'returns a new team with same strike positions' do
         striker = instance_double(Batsman)
         non_striker = instance_double(Batsman)
 
         resultant_team = instance_double(Team)
-        expect(Team).to receive(:new).with(team_name, non_striker, striker, yet_to_play_batsmen, out_batsmen,).and_return(resultant_team)
+        expect(Team).to receive(:new).with(team_name, striker, non_striker, yet_to_play_batsmen, out_batsmen,).and_return(resultant_team)
         actual_team = Outcomes::OddScoreOutcome.new(2).resultant_team(team_name, striker, non_striker, yet_to_play_batsmen, out_batsmen, false)
 
         expect(actual_team).to eq resultant_team

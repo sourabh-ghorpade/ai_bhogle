@@ -1,40 +1,13 @@
 require 'spec_helper'
-require 'all_out_team'
-require 'played_ball'
-require 'batsman'
-require 'un_played_over'
-require 'played_over'
 
 describe AllOutTeam do
   let(:out_batsmen) { [instance_double(Batsman, score: 'B1 - 12 (2 balls)'),
                        instance_double(Batsman, score: 'B2 - 2 (2 balls)')] }
   let(:team) { AllOutTeam.new('Lengaburu', out_batsmen) }
 
-  describe '#play' do
-    context 'when no balls have been played' do
-      it 'returns UnPlayedOver and self' do
-        expected_over = instance_double(UnPlayedOver)
-        expect(UnPlayedOver).to receive(:new).and_return(expected_over)
-
-        actual_over, updated_team = team.play(2)
-
-        expect(actual_over).to eq expected_over
-        expect(updated_team).to eq team
-      end
-    end
-
-    context 'when some balls have been played' do
-      it 'returns PlayedOver' do
-        played_balls = [instance_double(PlayedBall)]
-        expected_over = instance_double(PlayedOver)
-        over_number = 2
-        expect(PlayedOver).to receive(:new).with(2, played_balls).and_return(expected_over)
-
-        actual_over, updated_team= team.play(over_number, played_balls)
-
-        expect(actual_over).to eq expected_over
-        expect(updated_team).to eq team
-      end
+  describe '#all_out?' do
+    it 'returns true' do
+      expect(team).to be_all_out
     end
   end
 

@@ -45,7 +45,7 @@ describe 'Match Integration Test' do
         non_striker = Batsman.new('MS Dhoni', dhoni_shot_probabilities)
         yet_to_play_batsmen = [Batsman.new('Irfan Khan', irfan_shot_probabilities), Batsman.new('Bumrah', bumrah_probabilities)]
         batting_team = Team.new(team_name, striker, non_striker, yet_to_play_batsmen, [])
-        expected_result = ['Lengaburu won by 4 wickets and 0 balls remaining', 'Virat Kohli- 6 (6 balls)', 'MS Dhoni- 6 (6 balls)', 'Irfan Khan- 0 (0 balls)', 'Bumrah- 0 (0 balls)', '2 overs left. 12 runs to win', '1.1 Virat Kohli scores 1 runs', '1.2 MS Dhoni scores 1 runs', '1.3 Virat Kohli scores 1 runs', '1.4 MS Dhoni scores 1 runs', '1.5 Virat Kohli scores 1 runs', '1.6 MS Dhoni scores 1 runs', '1 overs left. 6 runs to win', '2.1 MS Dhoni scores 1 runs', '2.2 Virat Kohli scores 1 runs', '2.3 MS Dhoni scores 1 runs', '2.4 Virat Kohli scores 1 runs', '2.5 MS Dhoni scores 1 runs', '2.6 Virat Kohli scores 1 runs']
+        expected_result = ["Lengaburu won by 4 wickets and 0 balls remaining", "Virat Kohli- 6 (6 balls)", "MS Dhoni- 6 (6 balls)", "Irfan Khan- 0 (0 balls)", "Bumrah- 0 (0 balls)", "2 overs left. 12 runs to win", "0.1 Virat Kohli scores 1 runs", "0.2 MS Dhoni scores 1 runs", "0.3 Virat Kohli scores 1 runs", "0.4 MS Dhoni scores 1 runs", "0.5 Virat Kohli scores 1 runs", "0.6 MS Dhoni scores 1 runs", "1 overs left. 6 runs to win", "1.1 MS Dhoni scores 1 runs", "1.2 Virat Kohli scores 1 runs", "1.3 MS Dhoni scores 1 runs", "1.4 Virat Kohli scores 1 runs", "1.5 MS Dhoni scores 1 runs", "1.6 Virat Kohli scores 1 runs"]
 
         actual_result = MatchSimulator.new(2, 12, batting_team).simulate
 
@@ -72,7 +72,7 @@ describe 'Match Integration Test' do
         non_striker = Batsman.new('MS Dhoni', {})
         yet_to_play_batsmen = [Batsman.new('Irfan Khan', {}), Batsman.new('Bumrah', {})]
         batting_team = Team.new(team_name, striker, non_striker, yet_to_play_batsmen, [])
-        expected_result = ['Lengaburu won by 4 wickets and 5 balls remaining', 'MS Dhoni- 0 (0 balls)', 'Virat Kohli- 4 (1 balls)', 'Irfan Khan- 0 (0 balls)', 'Bumrah- 0 (0 balls)', '1 overs left. 4 runs to win', '1.1 Virat Kohli scores 4 runs']
+        expected_result = ["Lengaburu won by 4 wickets and 5 balls remaining", "MS Dhoni- 0 (0 balls)", "Virat Kohli- 4 (1 balls)", "Irfan Khan- 0 (0 balls)", "Bumrah- 0 (0 balls)", "1 overs left. 4 runs to win", "0.1 Virat Kohli scores 4 runs"]
 
         actual_result = MatchSimulator.new(2, 4, batting_team).simulate
 
@@ -125,12 +125,13 @@ describe 'Match Integration Test' do
         non_striker = Batsman.new('MS Dhoni', dhoni_shot_probabilities)
         yet_to_play_batsmen = [Batsman.new('Irfan Khan', irfan_shot_probabilities), Batsman.new('Bumrah', bumrah_probabilities)]
         batting_team = Team.new(team_name, striker, non_striker, yet_to_play_batsmen, [])
-        expected_result = ['Lengaburu lost by 2 runs', 'Virat Kohli- 6 (6 balls)', 'MS Dhoni- 6 (6 balls)', 'Irfan Khan- 0 (0 balls)', 'Bumrah- 0 (0 balls)',
-                           '2 overs left. 14 runs to win', '1.1 Virat Kohli scores 1 runs', '1.2 MS Dhoni scores 1 runs',
-                           '1.3 Virat Kohli scores 1 runs', '1.4 MS Dhoni scores 1 runs', '1.5 Virat Kohli scores 1 runs',
-                           '1.6 MS Dhoni scores 1 runs', '1 overs left. 8 runs to win',
-                           '2.1 MS Dhoni scores 1 runs', '2.2 Virat Kohli scores 1 runs', '2.3 MS Dhoni scores 1 runs',
-                           '2.4 Virat Kohli scores 1 runs', '2.5 MS Dhoni scores 1 runs', '2.6 Virat Kohli scores 1 runs']
+        expected_result = ["Lengaburu lost by 2 runs", "Virat Kohli- 6 (6 balls)", "MS Dhoni- 6 (6 balls)",
+                           "Irfan Khan- 0 (0 balls)", "Bumrah- 0 (0 balls)", "2 overs left. 14 runs to win",
+                           "0.1 Virat Kohli scores 1 runs", "0.2 MS Dhoni scores 1 runs", "0.3 Virat Kohli scores 1 runs",
+                           "0.4 MS Dhoni scores 1 runs", "0.5 Virat Kohli scores 1 runs", "0.6 MS Dhoni scores 1 runs",
+                           "1 overs left. 8 runs to win", "1.1 MS Dhoni scores 1 runs", "1.2 Virat Kohli scores 1 runs",
+                           "1.3 MS Dhoni scores 1 runs", "1.4 Virat Kohli scores 1 runs", "1.5 MS Dhoni scores 1 runs",
+                           "1.6 Virat Kohli scores 1 runs"]
 
         actual_result = MatchSimulator.new(2, 14, batting_team).simulate
 
@@ -146,9 +147,9 @@ describe 'Match Integration Test' do
         yet_to_play_batsmen = [Batsman.new('Irfan Khan', {}), Batsman.new('Bumrah', {})]
         batting_team = Team.new(team_name, striker, non_striker, yet_to_play_batsmen, [])
         allow_any_instance_of(External::WeightedProbabilityPicker).to receive(:pick).and_return(Outcomes::OutOutcome.new)
-        expected_result = ['Lengaburu lost by 14 runs', 'Virat Kohli- 0 (1 balls)', 'Irfan Khan- 0 (1 balls)',
-                           'Bumrah- 0 (1 balls)', 'MS Dhoni- 0 (0 balls)', '1 overs left. 14 runs to win',
-                           '1.1 Virat Kohli gets out!', '1.2 Irfan Khan gets out!', '1.3 Bumrah gets out!']
+        expected_result = ["Lengaburu lost by 14 runs", "Virat Kohli- 0 (1 balls)", "Irfan Khan- 0 (1 balls)",
+                           "Bumrah- 0 (1 balls)", "MS Dhoni- 0 (0 balls)", "1 overs left. 14 runs to win",
+                           "0.1 Virat Kohli gets out!", "0.2 Irfan Khan gets out!", "0.3 Bumrah gets out!"]
 
         actual_result = MatchSimulator.new(2, 14, batting_team).simulate
 

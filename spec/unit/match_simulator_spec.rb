@@ -16,11 +16,11 @@ describe MatchSimulator do
           expect(team).to receive(:play).with(ball_number + 1).and_return([played_ball, team])
         end
         expect(PlayedOver).to receive(:new)
-                                  .with(1, [played_ball, played_ball, played_ball, played_ball, played_ball, played_ball])
+                                  .with(0, [played_ball, played_ball, played_ball, played_ball, played_ball, played_ball])
                                   .and_return(over)
 
         expect(PlayedOver).to receive(:new)
-                                  .with(2, [played_ball, played_ball, played_ball, played_ball, played_ball, played_ball])
+                                  .with(1, [played_ball, played_ball, played_ball, played_ball, played_ball, played_ball])
                                   .and_return(over)
         played_overs = [over]
         commentator = instance_double(Inning)
@@ -49,7 +49,7 @@ describe MatchSimulator do
             expect(team).to receive(:play).with(ball_number + 1).and_return([played_ball, team])
           end
           expect(PlayedOver).to receive(:new)
-                                    .with(1, [played_ball, played_ball])
+                                    .with(0, [played_ball, played_ball])
                                     .and_return(over)
           played_overs = [over]
           commentator = instance_double(Inning)
@@ -77,7 +77,7 @@ describe MatchSimulator do
           expect(team).to receive(:all_out?).and_return(true)
           expect(team).to receive(:play).with(1).and_return([played_ball, team])
           expect(PlayedOver).to receive(:new)
-                                    .with(1, [played_ball])
+                                    .with(0, [played_ball])
                                     .and_return(over)
           played_overs = [over]
           commentator = instance_double(Inning)

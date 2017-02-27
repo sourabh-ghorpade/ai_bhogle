@@ -12,11 +12,7 @@ class Inning
     pre_inning_comment = [over_commentary(@overs.size, runs_required_to_win)]
     comments = @overs.each.with_index(1).inject(pre_inning_comment) do |comments, (over, over_number)|
       runs_required_to_win -= over.runs_scored
-      if over.played?
-        end_of_over_commentary = [over_commentary(@overs.size - over_number, runs_required_to_win)]
-      else
-        end_of_over_commentary = []
-      end
+      end_of_over_commentary = [over_commentary(@overs.size - over_number, runs_required_to_win)]
       comments + over.comments + end_of_over_commentary
     end
     remove_final_over_comment(comments)

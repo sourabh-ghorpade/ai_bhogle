@@ -18,7 +18,7 @@ class MatchSimulator
     balls_played = played_balls
     overs_to_build = (balls_played.count / BALLS_IN_AN_OVER) != 0 ? (balls_played.count / BALLS_IN_AN_OVER) : 1
     overs_to_build.times.inject([]) do |overs, over_number|
-      played_over_new = PlayedOver.new(over_number + 1, balls_played.shift(BALLS_IN_AN_OVER))
+      played_over_new = PlayedOver.new(over_number, balls_played.shift(BALLS_IN_AN_OVER))
       overs << played_over_new
     end
   end
